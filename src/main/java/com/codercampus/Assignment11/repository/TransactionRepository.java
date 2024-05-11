@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,12 @@ public class TransactionRepository {
 	
 	public List<Transaction> findAll () {
 		return transactions;
+	}
+	
+	public Optional<Transaction> findById(Long id) {
+		return transactions.stream()
+				.filter(transaction -> transaction.getId().equals(id))
+				.findFirst();
 	}
 
 	/*
@@ -49,14 +56,4 @@ public class TransactionRepository {
 		
 	}
 
-	public Transaction findById(Long id) {
-		for(Transaction transaction : transactions) {
-			if(transaction.getId().equals(id)) {
-				return transaction;
-			}
-		}
-		return null;
-	}
-
-	
 }

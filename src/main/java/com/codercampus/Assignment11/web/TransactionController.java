@@ -13,23 +13,21 @@ import com.codercampus.Assignment11.service.TransactionService;
 
 @Controller
 public class TransactionController {
-	
+
 	@Autowired
 	private TransactionService transactionService;
 
-	
 	@GetMapping("/transactions")
 	public String getTransactions(Model model) {
-		List <Transaction> transactions = transactionService.getAllTransactions();
+		List<Transaction> transactions = transactionService.getAllTransactionsSortedByDate();
 		model.addAttribute("transactions", transactions);
+//		System.out.println(transactions);
 		return "transactions";
 	}
-	
 	@GetMapping("/transaction/{id}")
-	public String getTransactionByID(@PathVariable Long id, Model model) {
-		Transaction transaction = transactionService.getTransactionById(id);
-		model.addAttribute("transaction", transaction);
-		return "transactionid";
+    public String getTransactionDetails(@PathVariable Long id, Model model) {
+        Transaction transaction = transactionService.getTransactionById(id);
+        model.addAttribute("transactionDetails", transaction);
+        return "transactions";
 	}
-
 }
