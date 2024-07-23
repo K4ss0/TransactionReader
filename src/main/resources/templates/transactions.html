@@ -11,7 +11,8 @@
         	<span style="font-size: 32px; font-weight: bold;" th:text="${transactionDetails.type == 'D'} ? '(Debt)' : (${transactionDetails.type == 'C'} ? '(Credit)' : '(Unknown)')">()</span>
         </p>
         <p>Date: <span th:text="${transactionDetails.date}"></span></p>
-        <p>Amount: <span th:text="${transactionDetails.amount}"></span></p>
+        <p>Amount: <span th:text="${transactionDetails.type == 'C' ?
+        		-transactionDetails.amount : transactionDetails.amount}"></span></p>
         <p>Description: <span th:text="${transactionDetails.retailer}"></span></p>
         <a th:href="@{/transactions}">Back</a>
     </div>
